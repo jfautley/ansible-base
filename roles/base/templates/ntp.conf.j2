@@ -1,0 +1,34 @@
+# {{ ansible_managed }}
+
+{% if ansible_virtualization_role == "guest" %}
+# Only for virtual machines, allow for major clock offset/sync.
+# Usually seen when resuming from suspend.
+tinker panic 0
+{% endif %}
+
+# Disable NTP reflection attacks
+# http://isc.sans.org/diary/NTP+reflection+attack/17300
+disable monitor
+
+# Permit management/querying from localhost
+restrict 127.0.0.1
+restrict ::1
+{% if ntp_master %}
+# Permit other clients to query us
+restrict -4 default nomodify notrap nopeer
+restrict -6 default nomodify notrap nopeer
+{% else %}
+# Ignore everyone else
+restrict -4 default nomodify nopeer noquery notrap
+restrict -6 default nomodify nopeer noquery notrap
+{% endif %}
+
+# NTP Servers
+{% for server in ntp_servers %}
+server {{ server }}
+{% endfor %}
+
+# Logging/state information
+driftfile /var/lib/ntp/drift
+logfile /var/log/ntp.conf
+logconfig =syncevents +clockevents

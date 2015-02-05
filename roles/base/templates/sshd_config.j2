@@ -1,0 +1,37 @@
+# {{ ansible_managed }}
+
+{% for listenaddr in ssh_listen %}
+ListenAddress {{ listenaddr }}
+{% endfor %}
+
+Protocol 2
+
+SyslogFacility AUTHPRIV
+
+PermitRootLogin no
+MaxAuthTries 3
+
+RhostsRSAAuthentication no
+HostbasedAuthentication no
+IgnoreRhosts yes
+PasswordAuthentication no
+PermitEmptyPasswords no
+ChallengeResponseAuthentication no
+GSSAPIAuthentication no
+
+UsePAM yes
+
+# Accept locale-related environment variables
+AcceptEnv LANG LC_CTYPE LC_NUMERIC LC_TIME LC_COLLATE LC_MONETARY LC_MESSAGES
+AcceptEnv LC_PAPER LC_NAME LC_ADDRESS LC_TELEPHONE LC_MEASUREMENT
+AcceptEnv LC_IDENTIFICATION LC_ALL LANGUAGE
+AcceptEnv XMODIFIERS
+
+PrintMotd yes
+TCPKeepAlive yes
+UsePrivilegeSeparation yes
+UseDNS no
+
+Banner /etc/issue.net
+
+Subsystem   sftp    /usr/libexec/openssh/sftp-server

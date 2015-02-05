@@ -15,6 +15,7 @@ Vagrant.configure(2) do |config|
 
   config.vm.provision :ansible do |ansible|
     ansible.playbook = "playbook.yml"
+    ansible.sudo = true
     #ansible.extra_vars = { ntp_servers: "1.2.3.4" }
   end
 end

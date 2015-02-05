@@ -1,6 +1,4 @@
 ---
 - hosts: all
-  user: vagrant
-  sudo: true
   roles:
     - base

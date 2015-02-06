@@ -1,6 +1,6 @@
 # {{ ansible_managed }}
-
 {% if ansible_virtualization_role == "guest" %}
+
 # Only for virtual machines, allow for major clock offset/sync.
 # Usually seen when resuming from suspend.
 tinker panic 0

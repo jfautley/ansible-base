@@ -1,0 +1,8 @@
+---
+- name: Configure /etc/sudoers
+  copy: src=sudoers dest=/etc/sudoers
+  tags: sudo
+
+- name: Ensure /etc/sudoers.d exists
+  file: dest=/etc/sudoers.d state=directory owner=root group=root mode=0550
+  tags: sudo

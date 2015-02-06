@@ -1,0 +1,9 @@
+---
+- name: Add 'jon' group
+  group: name=jon gid=4556
+
+- name: Add 'jon' User
+  user: name=jon comment='Jon Fautley' uid=4556 group=jon createhome=yes groups=wheel password='*LK*'
+
+- name: Add SSH key for jon
+  authorized_key: user=jon key="{{ lookup('file', '/Users/jon/.ssh/id_dsa.pub') }}"

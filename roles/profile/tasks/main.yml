@@ -1,0 +1,4 @@
+---
+- name: Configure default system prompt
+  copy: src=prompt.sh dest=/etc/profile.d/prompt.sh mode=0755
+  tags: profile

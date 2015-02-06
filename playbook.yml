@@ -1,4 +1,11 @@
 ---
 - hosts: all
+
   roles:
-    - base
+    - clock
+    - banners
+    - ntp
+    - ssh-server
+    - sudo
+    - users
+    - profile

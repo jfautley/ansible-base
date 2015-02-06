@@ -1,0 +1,13 @@
+---
+- name: Install SSH server
+  yum: name=openssh state=installed
+  tags: sshd
+
+- name: Configure SSH server
+  template: src=sshd_config.j2 dest=/etc/ssh/sshd_config
+  tags: sshd
+  notify: restart sshd
+
+- name: Ensure SSH server is running
+  service: name=sshd state=started enabled=yes
+  tags: sshd

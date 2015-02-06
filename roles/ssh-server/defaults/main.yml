@@ -1,0 +1,5 @@
+---
+# Where should SSH listen?
+ssh_listen:
+  - '0.0.0.0'
+  - '::'

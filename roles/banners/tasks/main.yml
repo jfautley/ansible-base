@@ -1,0 +1,12 @@
+---
+- name: Configure MOTD
+  template: src=motd.j2 dest=/etc/motd
+  tags: banner
+
+- name: Configure /etc/issue
+  copy: src=issue dest=/etc/issue
+  tags: banner
+
+- name: Configure /etc/issue.net
+  file: src=/etc/issue dest=/etc/issue.net state=link force=true
+  tags: banner

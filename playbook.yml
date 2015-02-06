@@ -1,6 +1,13 @@
 ---
 - hosts: all
 
+  tasks:
+    - group_by: "key=os_{{ansible_distribution | lower}}"
+      changed_when: False
+
+- hosts: os_centos
+  gather_facts: no
+
   roles:
     - clock
     - banners
@@ -9,3 +16,4 @@
     - sudo
     - users
     - profile
+    - epel

@@ -1,0 +1,15 @@
+---
+- name: Configure EPEL 'bootstrap' repo
+  template: src=ansible-epel-bootstrap.repo.j2 dest=/etc/yum.repos.d/ansible-epel-bootstrap.repo
+  tags: epel
+  #when: epel_rpm_status.rc != 0
+
+- name: Install latest epel-release RPM
+  yum: name=epel-release state=latest enablerepo=ansible-epel-bootstrap
+  tags: epel
+  #when: epel_rpm_status.rc != 0
+
+- name: Remove EPEL bootstrap repo
+  file: path=/etc/yum.repos.d/ansible-epel-bootstrap.repo state=absent
+  tags: epel
+  #when: epel_rpm_status.rc != 0

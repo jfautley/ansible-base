@@ -1,0 +1,4 @@
+---
+# Basic repo settings for our 'bootstrap' repo
+epel_repo_url: "http://download.fedoraproject.org/pub/epel/{{ ansible_distribution_major_version }}/{{ ansible_userspace_architecture }}"
+epel_repo_gpg_key_url: "http://download.fedoraproject.org/pub/epel/RPM-GPG-KEY-EPEL-{{ ansible_distribution_major_version }}"

@@ -1,0 +1,12 @@
+---
+# Install our bootstrap EPEL repo, so we can update to the latest epel-release
+- name: Check if we have an epel-release RPM installed
+  shell: /bin/rpm -q epel-release
+  register: epel_rpm_status
+  tags: epel
+  ignore_errors: True
+  failed_when: False
+  changed_when: False
+
+- include: install-epel.yml
+  when: epel_rpm_status.rc != 0

@@ -9,6 +9,7 @@
     - os_centos
     - os_redhat
   gather_facts: no
+  sudo: yes
 
   roles:
     - clock
@@ -19,3 +20,10 @@
     - users
     - profile
     - epel
+
+- hosts: os_redhat
+  gather_facts: no
+  sudo: yes
+
+  roles:
+    - rhel-repos

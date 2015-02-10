@@ -7,6 +7,7 @@
   ignore_errors: True
   failed_when: False
   changed_when: False
+  always_run: True
 
 - include: install-epel.yml
   when: "epel_rpm_status.rc != 0"

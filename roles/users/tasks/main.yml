@@ -6,4 +6,7 @@
   user: name=jon comment='Jon Fautley' uid=4556 group=jon createhome=yes groups=wheel password='*LK*'
 
 - name: Add SSH key for jon
-  authorized_key: user=jon key=https://github.com/jfautley.keys
+  authorized_key: user=jon key="{{ item }}"
+  with_file:
+    - jfautley.keys
+  # authorized_key: user=jon key=https://github.com/jfautley.keys -- not until ansible 1.9 :(

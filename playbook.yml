@@ -8,6 +8,8 @@
 - hosts:
     - os_centos
     - os_redhat
+    - os_amazon
+
   gather_facts: no
   sudo: yes
 

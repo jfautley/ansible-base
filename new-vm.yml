@@ -1,27 +1,26 @@
 ---
-- name: Create virtual machine
-    hosts: hypervisors
-    gather_facts: false
-    sudo: false
-    
-    tasks:
+hosts: all
+gather_facts: false
+sudo: false
 
-      - name: get list of vms
-            virt: command=list_vms
-            register: virt_vms
-    
-      - name: create vm
-            command: virt-install -n {{ vm_hostname }}
-                                -r {{ vm_mem }}
-                                --vcpus {{ vm_cpus }}
-                                --location {{ vm_install_loc }}
-                                --os-type {{ vm_ostype }}
-                                --os-variant {{ vm_osvariant }}
-                                --network bridge=bvm1
-                                --graphics none
-                                --console pty,target_type=serial
-                                --disk /srv/vm-images/{{vm_hostname}}-disk1,size={{vm_disksize}}
-                                --noautoconsole
-                                --extra-args 'ks={{vm_ksurl}} console=ttyS0,115200n8 serial ip={{vm_ipaddr}} netmask=255.255.255.224 gateway=109.95.186.61 dns=8.8.8.8'
-          #when: item.name not in virt_vms.list_vms
-          #with_items: guests
+tasks:
+
+  - name: get list of vms
+        virt: command=list_vms
+        register: virt_vms
+
+  - name: create vm
+        command: virt-install -n {{ vm_hostname }}
+                            -r {{ vm_mem }}
+                            --vcpus {{ vm_cpus }}
+                            --location {{ vm_install_loc }}
+                            --os-type {{ vm_ostype }}
+                            --os-variant {{ vm_osvariant }}
+                            --network bridge=bvm1
+                            --graphics none
+                            --console pty,target_type=serial
+                            --disk /srv/vm-images/{{vm_hostname}}-disk1,size={{vm_disksize}}
+                            --noautoconsole
+                            --extra-args 'ks={{vm_ksurl}} console=ttyS0,115200n8 serial ip={{vm_ipaddr}} netmask=255.255.255.224 gateway=109.95.186.61 dns=8.8.8.8'
+      #when: item.name not in virt_vms.list_vms
+      #with_items: guests

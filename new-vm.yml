@@ -1,7 +1,6 @@
 ---
 - hosts: all
   gather_facts: no
-  sudo: false
         
   tasks:
       - name: get list of vms

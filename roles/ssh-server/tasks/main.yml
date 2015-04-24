@@ -1,7 +1,17 @@
 ---
-- name: Install SSH server
+- name: Include OS-specific variables
+  include_vars: "{{ ansible_os_family }}.yml"
+  tags: sshd
+
+- name: Install SSH server - RHEL
   yum: name=openssh state=installed
   tags: sshd
+  when: ansible_os_family == 'RedHat'
+
+- name: Install SSH server - Debian
+  apt: name=openssh-server state=installed
+  tags: sshd
+  when: ansible_os_family == 'Debian'
 
 - name: Configure SSH server
   template: src=sshd_config.j2 dest=/etc/ssh/sshd_config
@@ -9,5 +19,5 @@
   notify: restart sshd
 
 - name: Ensure SSH server is running
-  service: name=sshd state=started enabled=yes
+  service: name={{ sshd_service_name }} state=started enabled=yes
   tags: sshd

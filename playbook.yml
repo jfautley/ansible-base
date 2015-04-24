@@ -5,11 +5,7 @@
     - group_by: "key=os_{{ansible_distribution | lower}}"
       changed_when: False
 
-- hosts:
-    - os_centos
-    - os_redhat
-    - os_amazon
-
+- hosts: all
   gather_facts: no
   sudo: yes
 
@@ -19,9 +15,19 @@
     - ntp
     - ssh-server
     - sudo
-    - users
     - profile
-    - epel
+
+- hosts:
+    - os_centos
+    - os_redhat
+    - os_amazon
+
+  gather_facts: no
+  sudo: yes
+
+  roles:
+      - users
+      - epel
 
 - hosts: os_redhat
   gather_facts: no

@@ -1,7 +1,16 @@
 ---
+- name: Include OS-specific variables
+  include_vars: "{{ ansible_os_family }}.yml"
+  tags: ntp
 
-- name: Install NTP
+- name: Install NTP - Debian
+  apt: name=ntp state=installed
+  when: ansible_os_family == 'Debian'
+  tags: ntp
+
+- name: Install NTP - RHEL
   yum: name=ntp state=installed
+  when: ansible_os_family == 'RedHat'
   tags: ntp
 
 - name: Configure NTP service
@@ -10,5 +19,5 @@
   notify: restart ntp
 
 - name: Ensure NTP is started
-  service: name=ntpd state=started enabled=yes
+  service: name={{ ntp_service_name }} state=started enabled=yes
   tags: ntp

@@ -1,6 +1,6 @@
 ---
 - name: Configure /etc/sudoers
-  copy: src=sudoers dest=/etc/sudoers
+  copy: src=sudoers.{{ ansible_os_family }} dest=/etc/sudoers
   tags: sudo
 
 - name: Ensure /etc/sudoers.d exists

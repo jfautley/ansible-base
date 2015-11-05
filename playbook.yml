@@ -13,7 +13,6 @@
     - clock
     - banners
     - ntp
-    - ssh-server
     - sudo
     - profile
 
@@ -35,3 +34,12 @@
 
   roles:
     - rhel-repos
+
+# Do the SSH server configuration last, as disabling root login half way
+# through an Ansible run can be... fun.
+- hosts: all
+  gather_facts: no
+  sudo: yes
+
+  roles:
+    - ssh-server

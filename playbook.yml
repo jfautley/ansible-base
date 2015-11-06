@@ -31,9 +31,14 @@
 - hosts: os_redhat
   gather_facts: no
   sudo: yes
+  vars_files:
+    - vars/yumrepo.yml
 
   roles:
-    - rhel-repos
+    - role: yumrepo
+      yumrepo_finish: false
+    - role: yumrepo
+      yumrepo_finish: true
 
 # Do the SSH server configuration last, as disabling root login half way
 # through an Ansible run can be... fun.

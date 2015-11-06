@@ -1,0 +1,53 @@
+---
+reposerver: repo.appstal.com
+
+# Enable 'managed mode' - delete any repo files we don't manage ourselves
+yumrepo_manage: true
+
+# Keep the EPEL files as we pull these in via the epel-release RPM
+yumrepo_ignore_repos:
+  - epel
+  - epel-testing
+
+yumrepo_repos:
+  base-os:
+    name: Red Hat Enterprise Linux (v. {{ansible_distribution_major_version}} for {{ansible_architecture}})
+    baseurl: http://{{ reposerver }}/rhel/{{ansible_distribution_major_version}}/os/
+    gpgcheck: 1
+    gpgkey: file:///etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release
+    enabled: 1
+
+  rhel-optional:
+    name: Red Hat Enterprise Linux (v. {{ansible_distribution_major_version}} for {{ansible_architecture}}) - Optional RPMs
+    baseurl: http://{{ reposerver }}/rhel/{{ansible_distribution_major_version}}/optional/
+    gpgcheck: 1
+    gpgkey: file:///etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release
+    enabled: 1
+
+  rhel-extras:
+    name: Red Hat Enterprise Linux (v. {{ansible_distribution_major_version}} for {{ansible_architecture}}) - Extras
+    baseurl: http://{{ reposerver }}/rhel/{{ansible_distribution_major_version}}/extras/
+    gpgcheck: 1
+    gpgkey: file:///etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release
+    enabled: 0
+
+  rhel-supplementary:
+    name: Red Hat Enterprise Linux (v. {{ansible_distribution_major_version}} for {{ansible_architecture}}) - Supplementary
+    baseurl: http://{{ reposerver }}/rhel/{{ansible_distribution_major_version}}/supplementary/
+    gpgcheck: 1
+    gpgkey: file:///etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release
+    enabled: 0
+
+  rhel-rhscl:
+    name: Red Hat Enterprise Linux (v. {{ansible_distribution_major_version}} for {{ansible_architecture}}) - Software Collections
+    baseurl: http://{{ reposerver }}/rhel/{{ansible_distribution_major_version}}/rhscl/
+    gpgcheck: 1
+    gpgkey: file:///etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release
+    enabled: 0
+
+  oracle-java:
+    name: RH Provided Oracle Java RPMs (for RHEL {{ansible_distribution_major_version}} {{ansible_architecture}})
+    baseurl: http://{{ reposerver }}/rhel/{{ansible_distribution_major_version}}/oracle_java/
+    gpgcheck: 1
+    gpgkey: file:///etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release
+    enabled: 0

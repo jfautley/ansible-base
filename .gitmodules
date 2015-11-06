@@ -1,0 +1,3 @@
+[submodule "roles/yumrepo"]
+	path = roles/yumrepo
+	url = https://github.com/picotrading/ansible-yumrepo.git

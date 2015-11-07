@@ -1,13 +1,13 @@
 ---
 reposerver: repo.appstal.com
 
-# Enable 'managed mode' - delete any repo files we don't manage ourselves
-yumrepo_manage: true
+# Disable 'managed mode' - it's broken
+yumrepo_manage: false
 
 # Keep the EPEL files as we pull these in via the epel-release RPM
 yumrepo_ignore_repos:
-  - epel.repo
-  - epel-testing.repo
+  - epel
+  - epel-testing
 
 yumrepo_repos:
   base-os:

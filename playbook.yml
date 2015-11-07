@@ -23,32 +23,13 @@
 
   gather_facts: no
   sudo: yes
+  vars_files:
+    - vars/yumreposd.yml
 
   roles:
       - users
       - epel
-
-- hosts: os_redhat
-  gather_facts: no
-  sudo: yes
-  vars_files:
-    - vars/yumrepo.yml
-  roles:
-    - role: yumrepo
-
-  tasks:
-    - name: Get all configured yum repo files
-      shell: >
-        for repo in /etc/yum.repos.d/*.repo; do echo $(basename $repo .repo); done
-      register: yumrepos_configured
-      changed_when: False
-
-    - name: Remove unmanaged yum repos
-      file: path="/etc/yum.repos.d/{{ item }}.repo" state=absent
-      with_items: yumrepos_configured.stdout_lines
-      when:
-        - item not in yumrepo_repos.keys()
-        - item not in yumrepo_ignore_repos
+      - yumreposd
 
 # Do the SSH server configuration last, as disabling root login half way
 # through an Ansible run can be... fun.

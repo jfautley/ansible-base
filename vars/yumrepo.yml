@@ -6,8 +6,8 @@ yumrepo_manage: true
 
 # Keep the EPEL files as we pull these in via the epel-release RPM
 yumrepo_ignore_repos:
-  - epel
-  - epel-testing
+  - epel.repo
+  - epel-testing.repo
 
 yumrepo_repos:
   base-os:

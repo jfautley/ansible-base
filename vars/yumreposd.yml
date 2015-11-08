@@ -2,10 +2,10 @@
 reposerver: repo.appstal.com
 
 # Remove any repo files we didn't put there, or whitelist below
-yumrepo_delete_unmanaged: true
+yumreposd_delete_unmanaged: true
 
 # Keep the EPEL files as we pull these in via the epel-release RPM
-yumrepos_preserve:
+yumreposd_preserve:
   - epel
   - epel-testing
 

@@ -1,13 +1,8 @@
 ---
 - hosts: all
-
-  tasks:
-    - group_by: "key=os_{{ansible_distribution | lower}}"
-      changed_when: False
-
-- hosts: all
-  gather_facts: no
   sudo: yes
+  vars_files:
+    - vars/yumreposd.yml
 
   roles:
     - clock
@@ -15,27 +10,8 @@
     - ntp
     - sudo
     - profile
-
-- hosts:
-    - os_centos
-    - os_redhat
-    - os_amazon
-
-  gather_facts: no
-  sudo: yes
-  vars_files:
-    - vars/yumreposd.yml
-
-  roles:
-      - users
-      - epel
-      - yumreposd
-
-# Do the SSH server configuration last, as disabling root login half way
-# through an Ansible run can be... fun.
-- hosts: all
-  gather_facts: no
-  sudo: yes
-
-  roles:
+    - { role: users, when: "ansible_os_family == 'RedHat'" }
+    - { role: epel, when: "ansible_os_family == 'RedHat'" }
+    - { role: yumreposd, when: "ansible_os_family == 'RedHat'" }
+    - { role: yum-cron, when: "ansible_os_family == 'RedHat'" }
     - ssh-server

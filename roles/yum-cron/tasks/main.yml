@@ -1,0 +1,6 @@
+---
+- name: Ensure yum-cron package is installed
+  yum: name=yum-cron state=installed
+
+- name: Ensure yum-cron is enabled
+  service: name=yum-cron state=started enabled=yes

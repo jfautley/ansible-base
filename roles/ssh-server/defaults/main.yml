@@ -3,3 +3,10 @@
 ssh_listen:
   - '0.0.0.0'
   - '::'
+
+# What ports should SSH listen on?
+ssh_listen_ports:
+  - 22
+
+# Do we permit password-based authentcation? Defaults to "no"
+ssh_password_auth: no

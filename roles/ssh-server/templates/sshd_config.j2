@@ -1,6 +1,10 @@
 ### WARNING: This file is under Ansible control. ###
 ###          Manual changes will be overwritten. ###
 
+{% for listenport in ssh_listen_ports %}
+Port {{ listenport }}
+{% endfor %}
+
 {% for listenaddr in ssh_listen %}
 ListenAddress {{ listenaddr }}
 {% endfor %}
@@ -15,7 +19,11 @@ MaxAuthTries 3
 RhostsRSAAuthentication no
 HostbasedAuthentication no
 IgnoreRhosts yes
+{% if ssh_password_auth %}
+PasswordAuthentication yes
+{% else %}
 PasswordAuthentication no
+{% endif %}
 PermitEmptyPasswords no
 ChallengeResponseAuthentication no
 GSSAPIAuthentication no

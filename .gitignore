@@ -3,3 +3,7 @@
 
 # Ignore ansible inventory file
 inventory
+
+# Ignore ansible host/group variables
+host_vars/
+group_vars/

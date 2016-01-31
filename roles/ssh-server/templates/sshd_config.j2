@@ -21,11 +21,12 @@ HostbasedAuthentication no
 IgnoreRhosts yes
 {% if ssh_password_auth %}
 PasswordAuthentication yes
+ChallengeResponseAuthentication yes
 {% else %}
 PasswordAuthentication no
+ChallengeResponseAuthentication no
 {% endif %}
 PermitEmptyPasswords no
-ChallengeResponseAuthentication no
 GSSAPIAuthentication no
 
 UsePAM yes

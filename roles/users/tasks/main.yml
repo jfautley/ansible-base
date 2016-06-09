@@ -1,9 +1,12 @@
 ---
+- name: include os-specific vars
+  include_vars: "{{ ansible_os_family }}.yml"
+
 - name: Add 'jon' group
   group: name=jon gid=4556
 
 - name: Add 'jon' User
-  user: name=jon comment='Jon Fautley' uid=4556 group=jon createhome=yes groups=wheel password='*LK*' update_password=on_create
+  user: name=jon comment='Jon Fautley' uid=4556 group=jon createhome=yes groups={{ user_additional_groups }} password='*LK*' update_password=on_create shell=/bin/bash
 
 - name: Add SSH key for jon
   authorized_key: user=jon key=https://github.com/jfautley.keys

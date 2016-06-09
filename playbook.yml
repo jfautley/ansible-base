@@ -7,11 +7,11 @@
   roles:
     - clock
     - banners
-    - ntp
-    - sudo
-    - profile
-    - { role: users, when: "ansible_os_family == 'RedHat'" }
     - { role: epel, when: "ansible_os_family == 'RedHat'" }
     - { role: yumreposd, when: "ansible_os_family == 'RedHat'" }
     - { role: yum-cron, when: "ansible_os_family == 'RedHat'" }
+    - ntp
+    - sudo
+    - profile
+    - users
     - ssh-server

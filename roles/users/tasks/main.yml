@@ -9,4 +9,14 @@
   user: name=jon comment='Jon Fautley' uid=4556 group=jon createhome=yes groups={{ user_additional_groups }} password='*LK*' update_password=on_create shell=/bin/bash
 
 - name: Add SSH key for jon
-  authorized_key: user=jon key=https://github.com/jfautley.keys
+  authorized_key: user=jon key=https://github.com/jfautley.keys exclusive=yes
+
+- name: Add 'remadmin' group
+  group: name=remadmin gid=877
+
+- name: Add 'remadmin' User
+  user: name=remadmin comment='Remote Admin' uid=877 group=remadmin createhome=yes groups={{ user_additional_groups }} password='*LK*' shell=/bin/bash
+
+- name: Add 'remadmin' SSH key
+  authorized_key: user=remadmin exclusive=yes manage_dir=yes key="ssh-dss AAAAB3NzaC1kc3MAAACBAIbOC76jryAqnzk/5unbSbnPoBR4XcOBvNaXYcCrou4E1HjdonP9KZUWdM0uIwx1l+KU6u2ATRf7xitoTIL0QNnXQrpP1fsNUeaDidatwqyNMKC1s/y4KZRAU04SAQ/KqicYzfdolBQh9iG4ueYyr7W7dMHwtHH9tQ+LOJ/3ZTBVAAAAFQCvEOVaLNj0sAFNEgrvzlo0gNkPjQAAAIBZqbmf7F7BIG2cebwQDSWsTw/NmysXm5bY9OkZ0YZjLwTNIeE/YyKLap5w4BO0u/BTEZYkDRaz4yQ1HKTjyWEaJOlezTfiPcmnRXOirzYp0TeXn046YZAB7vigSf2xKT5gJS6Vn0rhwoReAI0Tip7GYhA75DgJJxpE8vq+ZqqA8gAAAIEAg/Uc4aMaYt/Ht5Y5U2B/kqt8X+/pnGkNDxxVqbf9Y+5XJWK3VYyqInav9CKhNYTGKhmfZ8wosgnBpamb755EZYxbgV3n5JKnUpSKDSsrOTNdC5zZio3Alpu35jX4Ibtid5kOJrKhdR0UowYz+Lft+IB4NO5ZWsbQDnv7bjqpT/M="
+

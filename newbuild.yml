@@ -9,3 +9,4 @@
       become: no
 
 - include: playbook.yml
+- include: reboot-patch.yml

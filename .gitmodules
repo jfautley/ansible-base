@@ -3,4 +3,4 @@
 	url = https://github.com/jfautley/ansible-role-yumreposd.git
 [submodule "roles/prometheus"]
 	path = roles/prometheus
-	url = git@github.com:William-Yeh/ansible-prometheus
+	url = https://github.com/William-Yeh/ansible-prometheus
